@@ -125,85 +125,98 @@ export function EventsDiscovery() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#071119]/82 via-transparent to-[#071119]/12" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f7f4ee] via-[#f7f4ee]/55 to-transparent" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto grid min-h-screen max-w-[1440px] gap-10 px-5 pb-20 pt-32 md:px-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
-        >
-          <motion.div {...reveal} className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.55em] text-white/80">Events around the world</p>
-            <h1 className="mt-6 max-w-3xl text-5xl font-black leading-[0.92] tracking-tight md:text-7xl xl:text-8xl">
-              Unforgettable <span className="block text-[#cdeeff]">Events</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-xl font-medium leading-8 text-white/88">
-              Music. People. Culture. Incredible locations. Find your next experience.
-            </p>
+        <div className="relative mx-auto flex min-h-screen max-w-[1440px] flex-col justify-between px-5 pb-10 pt-32 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="my-auto grid gap-10 py-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
+          >
+            <motion.div {...reveal} className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[0.55em] text-white/80">Events around the world</p>
+              <h1 className="mt-6 text-5xl font-black leading-[0.92] tracking-tight md:text-7xl xl:text-8xl">
+                Unforgettable <span className="block text-[#cdeeff]">Events</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-xl font-medium leading-8 text-white/88">
+                Music. People. Culture. Incredible locations. Find your next experience.
+              </p>
+            </motion.div>
 
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <motion.div
+              initial={{ opacity: 0, x: 36 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.35, duration: 0.7 }}
+              className="relative hidden min-h-[460px] lg:block"
+            >
+              <motion.div
+                whileHover={{ y: -6, scale: 1.03 }}
+                transition={{ duration: 0.25 }}
+                className="absolute right-0 top-0 z-30 flex max-w-[285px] items-center gap-4 rounded-[22px] border border-white/45 bg-white/85 p-6 text-[#101b24] shadow-2xl backdrop-blur-xl"
+              >
+                <Icon path={icons.pin} className="h-9 w-9 shrink-0" />
+                <div>
+                  <p className="text-lg font-black">Explore Events Worldwide</p>
+                  <p className="mt-2 text-sm leading-5 text-[#4f5a62]">Discover amazing experiences in iconic destinations.</p>
+                </div>
+                <Icon path={icons.arrowRight} className="h-5 w-5 shrink-0 text-[#53606a]" />
+              </motion.div>
+
+              {featuredEvent ? (
+                <motion.article
+                  whileHover={{ y: -8, scale: 1.025 }}
+                  transition={{ duration: 0.28 }}
+                  className="absolute bottom-2 right-0 z-20 w-[500px] overflow-hidden rounded-[28px] border-[10px] border-[#8ed8e8]/65 bg-[#071119]/88 shadow-2xl backdrop-blur-xl"
+                >
+                  <div className="relative h-36 bg-cover bg-center" style={{ backgroundImage: `url(${featuredEvent.image})` }}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071119]/25 to-transparent" />
+                    <span className="absolute right-3 top-3 rounded-full bg-[#1f9cf0] px-4 py-2 text-xs font-black uppercase tracking-wide text-white">
+                      Featured
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-4 p-6">
+                    <div>
+                      <h2 className="text-2xl font-black tracking-tight">Music & Lifestyle Events</h2>
+                      <p className="mt-1 text-sm text-white/78">Unforgettable moments in stunning locations.</p>
+                    </div>
+                    <Link href={`/events/${featuredEvent.citySlug}`} className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-[#071119] transition hover:bg-[#ff8fb8]" aria-label="View featured event">
+                      <Icon path={icons.arrowRight} className="h-6 w-6" />
+                    </Link>
+                  </div>
+                </motion.article>
+              ) : null}
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-20 mb-2 w-full rounded-[26px] border border-white/20 bg-black/45 p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+          >
+            <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
               {heroStats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ duration: 0.25 }}
-                  className={`flex items-center gap-5 ${index > 0 ? "xl:border-l xl:border-white/22 xl:pl-7" : ""}`}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ duration: 0.22 }}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-4 lg:gap-5 ${
+                    index > 0 ? "lg:border-l lg:border-white/20 lg:pl-8" : ""
+                  } ${index === 1 ? "max-lg:sm:border-l max-lg:sm:border-white/20 max-lg:sm:pl-6" : ""} ${
+                    index === 3 ? "max-lg:sm:border-l max-lg:sm:border-white/20 max-lg:sm:pl-6" : ""
+                  }`}
                 >
-                  <span className="grid h-16 w-16 shrink-0 place-items-center rounded-[18px] border border-white/18 bg-white/10 backdrop-blur-xl">
-                    <Icon path={stat.icon} className="h-7 w-7 text-white" />
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[18px] border border-white/22 bg-white/10 backdrop-blur-xl shadow-inner lg:h-16 lg:w-16">
+                    <Icon path={stat.icon} className="h-6 w-6 text-white lg:h-7 lg:w-7" />
                   </span>
-                  <span>
-                    <span className="block text-3xl font-black leading-none">{stat.value}</span>
-                    <span className="mt-2 block text-base font-medium text-white/86">{stat.label}</span>
-                  </span>
+                  <div>
+                    <span className="block text-2xl font-black leading-none tracking-tight text-white lg:text-3xl">{stat.value}</span>
+                    <span className="mt-2 block text-sm font-semibold tracking-wide text-white/85">{stat.label}</span>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 36 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-            className="relative hidden min-h-[560px] lg:block"
-          >
-            <motion.div
-              whileHover={{ y: -6, scale: 1.03 }}
-              transition={{ duration: 0.25 }}
-              className="absolute right-0 top-0 z-30 flex max-w-[285px] items-center gap-4 rounded-[22px] border border-white/45 bg-white/78 p-6 text-[#101b24] shadow-2xl backdrop-blur-xl"
-            >
-              <Icon path={icons.pin} className="h-9 w-9 shrink-0" />
-              <div>
-                <p className="text-lg font-black">Explore Events Worldwide</p>
-                <p className="mt-2 text-sm leading-5 text-[#4f5a62]">Discover amazing experiences in iconic destinations.</p>
-              </div>
-              <Icon path={icons.arrowRight} className="h-5 w-5 shrink-0 text-[#53606a]" />
-            </motion.div>
-
-            {featuredEvent ? (
-              <motion.article
-                whileHover={{ y: -8, scale: 1.025 }}
-                transition={{ duration: 0.28 }}
-                className="absolute bottom-24 right-4 z-20 w-[520px] overflow-hidden rounded-[28px] border-[10px] border-[#8ed8e8]/65 bg-[#071119]/88 shadow-2xl backdrop-blur-xl"
-              >
-                <div className="relative h-36 bg-cover bg-center" style={{ backgroundImage: `url(${featuredEvent.image})` }}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071119]/25 to-transparent" />
-                  <span className="absolute right-3 top-3 rounded-full bg-[#1f9cf0] px-4 py-2 text-xs font-black uppercase tracking-wide text-white">
-                    Featured
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-4 p-6">
-                  <div>
-                    <h2 className="text-2xl font-black tracking-tight">Music & Lifestyle Events</h2>
-                    <p className="mt-1 text-sm text-white/78">Unforgettable moments in stunning locations.</p>
-                  </div>
-                  <Link href={`/events/${featuredEvent.citySlug}`} className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-[#071119] transition hover:bg-[#ff8fb8]" aria-label="View featured event">
-                    <Icon path={icons.arrowRight} className="h-6 w-6" />
-                  </Link>
-                </div>
-              </motion.article>
-            ) : null}
-          </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       <section className="sticky top-[73px] z-30 border-b border-black/5 bg-[#f7f4ee]/88 px-5 py-4 backdrop-blur-xl md:px-12">
@@ -217,7 +230,7 @@ export function EventsDiscovery() {
           >
             All Events
           </button>
-          {regionGroups.map((region) =>
+          {regionGroups.flatMap((region) =>
             cities
               .filter((city) => city.region === region)
               .map((city) => (

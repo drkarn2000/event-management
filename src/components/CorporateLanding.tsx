@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { testimonials } from "@/lib/data/site";
+import { CorporateHero } from "@/components/CorporateHero";
 
 const reveal = {
   initial: { opacity: 0, y: 28 },
@@ -105,51 +106,7 @@ export function CorporateLanding() {
 
   return (
     <main className="overflow-hidden bg-[#f5f7fb] text-[#0c1524]">
-      <section className="relative min-h-[70vh] overflow-hidden bg-[#0c1524] text-white">
-        <motion.div
-          initial={{ scale: 1.06 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c1524]/94 via-[#0c1524]/55 to-[#0c1524]/15" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f5f7fb] to-transparent" />
-        <div className="relative mx-auto flex min-h-[70vh] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 md:px-12">
-          <motion.div {...reveal}>
-            <div className="mb-6 flex items-center gap-2 text-sm font-bold text-white/70">
-              <Link href="/" className="hover:text-white">Home</Link>
-              <span>&gt;</span>
-              <span>Corporate & Organisational</span>
-            </div>
-            <p className="text-xs font-black uppercase tracking-[0.5em] text-white/75">Corporate & organisational events</p>
-            <h1 className="mt-5 max-w-3xl text-6xl font-black leading-[0.95] tracking-tight md:text-8xl">
-              Meaningful Events. Stronger Teams.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-white/85">
-              We create exceptional corporate experiences that inspire, connect and deliver real impact.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a href="#proposal" className="rounded-full bg-[#ff8fb8] px-8 py-4 text-sm font-black text-[#0c1524] transition hover:bg-white">Enquire Now &rarr;</a>
-              <Link href="/galleries" className="flex items-center gap-2 rounded-full border border-white/40 px-8 py-4 text-sm font-black text-white transition hover:bg-white hover:text-[#0c1524]">
-                <span className="grid h-4 w-4 place-items-center">▶</span> Watch Video
-              </Link>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-            className="absolute bottom-14 right-5 hidden items-center gap-3 rounded-[20px] border border-white/25 bg-white/10 px-5 py-4 shadow-2xl backdrop-blur-xl lg:flex"
-          >
-            <Icon path={icons.users} className="h-8 w-8 text-white/85" />
-            <div>
-              <p className="text-sm font-black">Trusted by 200+</p>
-              <p className="text-xs text-white/70">Companies & Organisations</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CorporateHero />
 
       <section className="mx-auto grid max-w-[1440px] gap-8 px-5 py-14 sm:grid-cols-2 md:px-12 lg:grid-cols-5">
         {categories.map((item) => (
@@ -243,8 +200,8 @@ export function CorporateLanding() {
               <div>
                 <p className="font-black">{testimonial.name}</p>
                 <p className="text-[#ffb000] text-sm">
-                  {"★".repeat(testimonial.rating)}
-                  {"☆".repeat(5 - testimonial.rating)}
+                  {"â˜…".repeat(testimonial.rating)}
+                  {"â˜†".repeat(5 - testimonial.rating)}
                 </p>
               </div>
               <div className="flex gap-2">
@@ -270,22 +227,207 @@ export function CorporateLanding() {
         </motion.div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#0c1524] text-white">
-        <div className="absolute inset-0 bg-cover bg-center opacity-45" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1800&auto=format&fit=crop)" }} />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c1524]/90 via-[#0c1524]/80 to-[#0c1524]/25" />
-        <div className="relative mx-auto grid max-w-[1440px] gap-8 px-5 py-20 md:px-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div />
-          <motion.div {...reveal}>
-            <p className="text-xs font-black uppercase tracking-[0.5em] text-white/70">Let&apos;s build something great</p>
-            <h2 className="mt-4 text-4xl font-black leading-tight tracking-tight md:text-5xl">Ready to Elevate Your Next Event?</h2>
-            <p className="mt-4 text-lg leading-8 text-white/82">
-              Partner with a team that understands business goals as well as it understands good hospitality.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a href="#proposal" className="rounded-full bg-[#ff8fb8] px-8 py-4 text-sm font-black text-[#0c1524] transition hover:bg-white">Request a Proposal &rarr;</a>
-              <a href="tel:+61000000000" className="rounded-full border border-white/35 px-8 py-4 text-sm font-black text-white transition hover:bg-white hover:text-[#0c1524]">Call Us</a>
-            </div>
+      {/* ── PREMIUM CTA SECTION ── */}
+      <section className="relative overflow-hidden text-white">
+
+        {/* BG image */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: "url('/CTA section for corporate page.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }} />
+
+        {/* Dark overlay so text stays readable */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(135deg, rgba(7,21,34,0.88) 0%, rgba(7,21,34,0.72) 50%, rgba(7,21,34,0.60) 100%)",
+        }} />
+
+        {/* Subtle pink tint top-right */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: "radial-gradient(ellipse 55% 50% at 90% 10%, rgba(255,143,184,0.1) 0%, transparent 70%)",
+        }} />
+
+        {/* Top fade from previous light section */}
+        <div className="absolute inset-x-0 top-0 h-24 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, #f5f7fb 0%, transparent 100%)" }} />
+
+        {/* Bottom cream glow */}
+        <div className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
+          style={{ background: "linear-gradient(to top, #fffaf2 0%, transparent 100%)" }} />
+
+        <div className="relative mx-auto max-w-[1440px] px-5 py-28 md:px-12 lg:py-36">
+
+          {/* ── EYEBROW ── */}
+          <motion.div {...reveal} className="flex items-center gap-3 mb-10">
+            <div style={{ width: 32, height: 2, background: "#FF8FB8", borderRadius: 2 }} />
+            <span style={{
+              fontFamily: "Plus Jakarta Sans, sans-serif",
+              fontSize: "0.57rem", fontWeight: 800,
+              letterSpacing: "0.36em", color: "rgba(255,255,255,0.48)",
+              textTransform: "uppercase",
+            }}>
+              Let&apos;s Build Something Great
+            </span>
           </motion.div>
+
+          {/* ── TWO-COLUMN GRID ── */}
+          <div className="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:items-end">
+
+            {/* LEFT: big serif headline + stats */}
+            <motion.div {...reveal}>
+              <h2 style={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: "clamp(2.8rem, 5.2vw, 5rem)",
+                fontWeight: 900, lineHeight: 1.02,
+                letterSpacing: "-0.03em", color: "#ffffff",
+              }}>
+                Ready to<br />
+                Elevate Your<br />
+                <em style={{ color: "#FF8FB8", fontStyle: "italic" }}>Next Event?</em>
+              </h2>
+
+              {/* Pink editorial underline */}
+              <svg viewBox="0 0 360 16" fill="none" className="mt-4 w-56 md:w-72" style={{ display: "block" }}>
+                <path d="M4 11 Q90 2 180 9 Q270 16 356 5"
+                  stroke="#FF8FB8" strokeWidth="1.7" strokeLinecap="round" opacity="0.4" />
+              </svg>
+
+              {/* Stats */}
+              <div className="mt-12 flex flex-wrap gap-x-10 gap-y-7">
+                {[
+                  { val: "200+", lbl: "Companies Served" },
+                  { val: "12+",  lbl: "Years Experience" },
+                  { val: "98%",  lbl: "Client Satisfaction" },
+                ].map(({ val, lbl }) => (
+                  <div key={lbl}>
+                    <p style={{
+                      fontFamily: "Playfair Display, serif",
+                      fontSize: "clamp(2rem, 3.2vw, 2.8rem)",
+                      fontWeight: 900, color: "#FF8FB8", lineHeight: 1,
+                    }}>{val}</p>
+                    <p style={{
+                      fontFamily: "Plus Jakarta Sans, sans-serif",
+                      fontSize: "0.62rem", fontWeight: 700,
+                      color: "rgba(255,255,255,0.38)",
+                      letterSpacing: "0.1em", textTransform: "uppercase",
+                      marginTop: "0.35rem",
+                    }}>{lbl}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* RIGHT: copy + CTAs + trust badge */}
+            <motion.div {...reveal} className="flex flex-col">
+              <p style={{
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontSize: "clamp(0.92rem, 1.05vw, 1.05rem)",
+                lineHeight: 1.85, color: "rgba(255,255,255,0.6)",
+                maxWidth: "29rem", marginBottom: "2.5rem",
+              }}>
+                Partner with a team that understands business goals as well as
+                it understands good hospitality. From strategy to standing
+                ovation — we handle every detail.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-4 mb-10">
+                <motion.a
+                  href="#proposal"
+                  whileHover={{ y: -3, boxShadow: "0 14px 40px rgba(255,143,184,0.45)" }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    background: "#FF8FB8", color: "#071522",
+                    fontFamily: "Plus Jakarta Sans, sans-serif",
+                    fontWeight: 800, fontSize: "0.85rem",
+                    padding: "1rem 2rem", borderRadius: 999,
+                    textDecoration: "none",
+                    boxShadow: "0 4px 22px rgba(255,143,184,0.22)",
+                  }}
+                >
+                  <span>Request a Proposal</span>
+                  <motion.span
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.22 }}
+                    style={{ display: "inline-block" }}
+                  >→</motion.span>
+                </motion.a>
+
+                <motion.a
+                  href="tel:+61000000000"
+                  whileHover={{
+                    borderColor: "rgba(255,255,255,0.5)",
+                    background: "rgba(255,255,255,0.06)",
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    background: "transparent",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    color: "#fff",
+                    fontFamily: "Plus Jakarta Sans, sans-serif",
+                    fontWeight: 700, fontSize: "0.85rem",
+                    padding: "1rem 1.8rem", borderRadius: 999,
+                    textDecoration: "none",
+                  }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7}
+                    strokeLinecap="round" strokeLinejoin="round"
+                    style={{ height: 16, width: 16 }}>
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 4.2 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.7 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L9.1 9.9a16 16 0 0 0 5 5l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.8.7A2 2 0 0 1 22 16.9z" />
+                  </svg>
+                  <span>Call Us</span>
+                </motion.a>
+              </div>
+
+              {/* Trust badge */}
+              <div style={{
+                display: "flex", alignItems: "center", gap: "1rem",
+                padding: "0.95rem 1.25rem",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 14,
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                maxWidth: "30rem",
+              }}>
+                <div style={{ flexShrink: 0 }}>
+                  <div style={{ color: "#FFB800", fontSize: "0.72rem", letterSpacing: 2 }}>★★★★★</div>
+                  <p style={{
+                    fontFamily: "Plus Jakarta Sans, sans-serif",
+                    fontSize: "0.58rem", color: "rgba(255,255,255,0.38)", marginTop: 3,
+                  }}>Rated 4.9 / 5.0</p>
+                </div>
+                <div style={{ width: 1, height: 34, background: "rgba(255,255,255,0.1)", flexShrink: 0 }} />
+                <p style={{
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                  fontSize: "0.66rem", fontWeight: 600,
+                  color: "rgba(255,255,255,0.5)", lineHeight: 1.6,
+                }}>
+                  Trusted by 200+ companies across<br />Australia, UK &amp; Europe
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── BOTTOM BRAND LINE ── */}
+          <motion.div {...reveal} className="mt-24 flex items-center gap-5">
+            <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, rgba(255,143,184,0.22), transparent)" }} />
+            <span style={{
+              fontFamily: "Plus Jakarta Sans, sans-serif",
+              fontSize: "0.48rem", fontWeight: 700,
+              letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)",
+              textTransform: "uppercase", whiteSpace: "nowrap",
+            }}>
+              STRATEGY • PEOPLE • EXPERIENCES • REAL IMPACT
+            </span>
+            <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, rgba(255,143,184,0.22), transparent)" }} />
+          </motion.div>
+
         </div>
       </section>
     </main>

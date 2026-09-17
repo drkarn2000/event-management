@@ -27,7 +27,7 @@ export function EventsTabs() {
             key={item}
             onClick={() => selectRegion(item)}
             className={`rounded-full px-4 py-2 text-sm font-black uppercase tracking-wide transition ${
-              region === item ? "bg-[#141414] text-white" : "bg-white text-[#141414] hover:bg-[#ffd45a]"
+              region === item ? "bg-[#141414] text-white" : "bg-white text-[#141414] hover:bg-[#FF8FB8]"
             }`}
             type="button"
           >
@@ -83,7 +83,7 @@ export function EventsTabs() {
           <div className="mt-6 rounded-md border border-white/15 bg-white/10 p-4 text-sm text-white/80">
             Embed URL: {selectedCity.bookingWidgetUrl}
           </div>
-          <a href={selectedCity.bookingWidgetUrl} className="mt-6 block rounded-full bg-[#ffd45a] px-5 py-3 text-center text-sm font-black uppercase tracking-wide text-[#141414]">
+          <a href={selectedCity.bookingWidgetUrl} className="mt-6 block rounded-full bg-[#FF8FB8] px-5 py-3 text-center text-sm font-black uppercase tracking-wide text-[#071119] transition hover:bg-white">
             Open Booking
           </a>
         </aside>

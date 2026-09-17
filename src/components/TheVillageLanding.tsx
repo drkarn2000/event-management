@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { hosts, getFeaturedHost } from "@/lib/data/hosts";
+import { VillageHero } from "@/components/VillageHero";
 
 const reveal = {
   initial: { opacity: 0, y: 28 },
@@ -11,9 +12,6 @@ const reveal = {
   viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
 } as const;
-
-const heroImage =
-  "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=2200&auto=format&fit=crop";
 
 function Icon({ path, className = "h-6 w-6" }: { path: string; className?: string }) {
   return (
@@ -66,46 +64,7 @@ export function TheVillageLanding() {
 
   return (
     <main className="overflow-hidden bg-[#f7f4ee] text-[#101b24]">
-      <section className="relative min-h-[62vh] overflow-hidden bg-[#071119] text-white">
-        <motion.div
-          initial={{ scale: 1.06 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071119]/92 via-[#071119]/50 to-[#071119]/10" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f7f4ee] to-transparent" />
-        <div className="relative mx-auto flex min-h-[62vh] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 md:px-12">
-          <motion.div {...reveal}>
-            <p className="text-xs font-black uppercase tracking-[0.55em] text-white/80">The Village</p>
-            <h1 className="mt-5 max-w-3xl text-6xl font-black leading-[0.92] tracking-tight md:text-8xl">
-              Meet Our Incredible Hosts
-            </h1>
-            <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-white/86">
-              Passionate people. Unforgettable experiences. Our hosts bring destinations to life with their local
-              knowledge, unique stories and infectious energy.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a href="#hosts" className="rounded-full bg-[#ff8fb8] px-8 py-4 text-sm font-black text-[#071119] transition hover:bg-white">
-                Meet the Hosts
-              </a>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-            className="absolute bottom-14 right-5 hidden items-center gap-3 rounded-[20px] border border-white/25 bg-white/10 px-5 py-4 shadow-2xl backdrop-blur-xl lg:flex"
-          >
-            <Icon path={icons.users} className="h-8 w-8 text-white/85" />
-            <div>
-              <p className="text-sm font-black">A Community</p>
-              <p className="text-xs text-white/70">of Local Experts</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <VillageHero />
 
       <section className="mx-auto grid max-w-[1440px] gap-8 px-5 py-14 sm:grid-cols-2 md:px-12 lg:grid-cols-5">
         {highlights.map((item) => (

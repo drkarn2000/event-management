@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const reveal = {
   initial: { opacity: 0, y: 28 },
@@ -83,18 +84,6 @@ const team = [
   },
 ];
 
-const heroWords = ["Real People.", "Extraordinary", "Experiences."];
-
-const heroContainer = {
-  initial: {},
-  animate: { transition: { staggerChildren: 0.12, delayChildren: 0.25 } },
-};
-
-const heroWord = {
-  initial: { opacity: 0, y: 46, rotate: 3, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, rotate: 0, filter: "blur(0px)", transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } },
-} as const;
-
 const heroCollageImages = [
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop",
@@ -108,148 +97,355 @@ const heroStrip = [
   { icon: icons.globe, value: "A Global", label: "Community" },
 ];
 
-const heroHighlights = [
+const archPhoto = "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=2200&auto=format&fit=crop";
+
+const editorialCards = [
   {
     title: "Extraordinary Locations",
-    text: "From hidden gems to iconic destinations.",
+    subtitle: "From hidden gems to iconic destinations.",
+    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=800&auto=format&fit=crop",
     icon: icons.pin,
-    className: "right-2 top-4 hidden max-w-[255px] lg:flex",
-    tone: "text-[#10211a]",
+    alt: "Santorini coastal Mediterranean architecture",
   },
   {
     title: "Unforgettable Events",
-    text: "Curated experiences in stunning locations.",
+    subtitle: "Curated experiences in stunning locations.",
+    image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=800&auto=format&fit=crop",
     icon: icons.calendar,
-    className: "right-0 top-[42%] hidden max-w-[250px] xl:flex",
-    tone: "text-[#a47755]",
-  },
-  {
-    title: "Meaningful Connections",
-    text: "Bringing people together through shared passions.",
-    icon: icons.users,
-    className: "bottom-[28%] left-4 hidden max-w-[335px] bg-[#101b24]/88 text-white lg:flex",
-    tone: "text-white",
+    alt: "Celebration crowd at curated event",
   },
   {
     title: "Passionate Locals",
-    text: "Authentic experiences guided by real people.",
+    subtitle: "Authentic experiences guided by real people.",
+    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop",
     icon: icons.leaf,
-    className: "bottom-16 right-4 hidden max-w-[270px] lg:flex",
-    tone: "text-[#10211a]",
+    alt: "Passionate local hosts and travelers",
   },
 ];
 
+const communityAvatars = [
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
+];
+
 export function AboutLanding() {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
   return (
-    <main className="overflow-hidden bg-[#f7f4ee] text-[#101b24]">
-      <section className="relative min-h-screen overflow-hidden bg-[#f4f1ea] pt-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(255,255,255,0.95),rgba(244,241,234,0.74)_40%,rgba(236,227,216,0.74)_100%)]" />
-        <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{ backgroundImage: `url(${heroBgImage})` }} />
-        <div className="absolute inset-0 bg-[linear-gradient(112deg,#fbfaf6_0%,#fbfaf6_43%,rgba(251,250,246,0.62)_54%,rgba(251,250,246,0.18)_100%)]" />
-        <div className="absolute -right-20 bottom-0 h-52 w-[58%] rotate-[-10deg] bg-white/72" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f7f4ee] via-[#f7f4ee]/85 to-transparent" />
+    <main className="overflow-hidden bg-[#FAF7F2] text-[#111827]">
+      {/* Editorial Luxury Hero Section */}
+      <section className="relative min-h-[920px] lg:min-h-screen overflow-hidden bg-[#FAF7F2] pt-24 sm:pt-28 md:pt-30 pb-16 lg:pb-20 flex flex-col justify-between">
+        {/* Subtle Warm Photographic Atmosphere & Background Gradients */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.98)_0%,rgba(250,247,242,0.9)_35%,rgba(245,240,233,0.7)_100%)]" />
+        <div className="pointer-events-none absolute left-0 top-0 h-[650px] w-[600px] bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.9)_0%,transparent_75%)] opacity-85" />
 
-        <div className="relative mx-auto grid min-h-[calc(100vh-7rem)] max-w-[1440px] gap-10 px-5 pb-14 md:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="z-10 max-w-2xl pt-4">
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative inline-flex w-fit items-center gap-5 text-xs font-black uppercase tracking-[0.45em] text-[#5c665f]"
-            >
-              Our Story
-              <span className="h-px w-24 bg-[#5c665f]/55" />
-            </motion.p>
-            <motion.h1
-              variants={heroContainer}
-              initial="initial"
-              animate="animate"
-              className="mt-10 flex max-w-2xl flex-col text-4xl font-black leading-[0.98] text-[#101b24] sm:text-5xl md:text-6xl xl:text-7xl"
-            >
-              {heroWords.map((word, index) => (
-                <motion.span key={word} variants={heroWord} className={`inline-block ${index === 1 ? "text-[#b99176]" : ""}`}>
-                  {word}
-                </motion.span>
-              ))}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.05, duration: 0.65 }}
-              className="mt-7 max-w-xl text-lg font-medium leading-8 text-[#59636d]"
-            >
-              We connect people with unique experiences, incredible locations and passionate locals - creating
-              moments that last a lifetime.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.65 }}
-              className="mt-9 flex flex-wrap items-center gap-4"
-            >
-              <motion.a
-                href="#our-story"
-                whileHover={{ scale: 1.04, boxShadow: "0 20px 45px rgba(30,55,43,0.22)" }}
-                whileTap={{ scale: 0.96 }}
-                className="rounded-full bg-[#1f382c] px-10 py-4 text-sm font-black text-white transition-colors hover:bg-[#101b24]"
-              >
-                Our Story &rarr;
-              </motion.a>
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-3 rounded-full border border-black/15 bg-white/28 px-8 py-4 text-sm font-black text-[#101b24] transition-colors hover:bg-[#101b24] hover:text-white"
-              >
-                <Icon path={icons.play} className="h-4 w-4" /> Watch Video
-              </motion.button>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.35, duration: 0.65 }}
-              className="mt-12 grid gap-5 border-t border-black/12 pt-7 sm:grid-cols-2 lg:grid-cols-4"
-            >
-              {heroStrip.map((stat) => (
-                <div key={stat.label} className="border-black/15 sm:pr-5 lg:border-r last:border-r-0">
-                  <Icon path={stat.icon} className="h-6 w-6 text-[#9b6d52]" />
-                  <p className="mt-3 text-2xl font-black leading-none text-[#101b24]">{stat.value}</p>
-                  <p className="mt-2 text-sm font-medium text-[#334038]">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+        {/* Ambient Warm Tone & Pink Accent Glows */}
+        <div className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-[#FFEBF2]/40 blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-1/4 h-[550px] w-[550px] rounded-full bg-[#FFF2EA]/35 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/80 to-transparent" />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative min-h-[620px] w-full max-w-4xl justify-self-end max-lg:hidden"
-          >
-            {heroHighlights.map((item, index) => (
+        <div className="relative mx-auto w-full max-w-[1520px] px-5 sm:px-8 md:px-12 flex-1 flex flex-col justify-center">
+          {/* Main Editorial Composition */}
+          <div className="grid items-center gap-8 lg:grid-cols-[0.92fr_1.08fr] xl:grid-cols-[0.9fr_1.1fr] xl:gap-12 pt-2 sm:pt-4">
+
+            {/* LEFT SIDE: Editorial Typography & Information Block */}
+            <div className="z-20 flex flex-col justify-between pr-0 lg:pr-4">
+              {/* Eyebrow: 01 / 05 — OUR STORY */}
               <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: [0, -12, 0] }}
-                transition={{
-                  opacity: { delay: 0.8 + index * 0.12, duration: 0.55 },
-                  y: { duration: 4.5 + index * 0.35, repeat: Infinity, ease: "easeInOut", delay: index * 0.45 },
-                }}
-                whileHover={{ y: -5 }}
-                className={`absolute z-40 items-center gap-4 rounded-[22px] border border-white/55 bg-white/82 px-6 py-5 shadow-2xl backdrop-blur-xl ${item.className}`}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex items-center gap-4 text-xs font-semibold tracking-wider text-[#4B5563]"
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/70">
-                  <Icon path={item.icon} className={`h-7 w-7 ${item.tone}`} />
+                <span className="flex items-baseline">
+                  <span className="font-bold text-[#FF8FB8] border-b-2 border-[#FF8FB8] pb-0.5 leading-none">01</span>
+                  <span className="text-[#9CA3AF] mx-1">/</span>
+                  <span className="text-[#9CA3AF]">05</span>
                 </span>
-                <span>
-                  <span className="block text-base font-black leading-tight">{item.title}</span>
-                  <span className="mt-2 block text-sm leading-5 opacity-75">{item.text}</span>
-                </span>
+                <span className="h-px w-10 sm:w-14 bg-[#D1D5DB]" />
+                <span className="uppercase tracking-[0.35em] text-xs font-bold text-[#4B5563]">OUR STORY</span>
               </motion.div>
-            ))}
-          </motion.div>
+
+              {/* Large Luxury Serif Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-6 sm:mt-8 font-serif-luxury text-5xl sm:text-6xl md:text-7xl xl:text-[84px] font-normal leading-[0.95] tracking-[-0.02em] text-[#111827]"
+              >
+                <span className="block">Real People.</span>
+                <span className="block text-[#FF8FB8] font-normal">Extraordinary</span>
+                <span className="block">Experiences.</span>
+              </motion.h1>
+
+              {/* Editorial Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.35 }}
+                className="mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-[#4B5563]"
+              >
+                We connect people with unique experiences, incredible locations and passionate locals &ndash; creating
+                moments that last a lifetime.
+              </motion.p>
+
+              {/* Minimal Luxury Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.5 }}
+                className="mt-8 flex flex-wrap items-center gap-4"
+              >
+                <Link
+                  href="#our-story"
+                  className="group inline-flex items-center justify-center rounded-full bg-[#FF8FB8] px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_rgba(255,143,184,0.38)] transition-all duration-300 hover:bg-[#ff7aa8] hover:shadow-[0_15px_32px_rgba(255,143,184,0.52)] hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <span>Our Story &rarr;</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setIsVideoModalOpen(true)}
+                  className="group inline-flex items-center gap-3 rounded-full border border-neutral-800/80 bg-white/40 px-7 py-3.5 text-sm sm:text-base font-semibold text-[#111827] backdrop-blur-sm transition-all duration-300 hover:bg-[#111827] hover:text-white hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <span className="grid h-5 w-5 place-items-center rounded-full border border-current transition-transform duration-300 group-hover:scale-110">
+                    <svg className="h-2.5 w-2.5 fill-current ml-0.5" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                  <span>Watch Video</span>
+                </button>
+              </motion.div>
+
+              {/* BOTTOM AREA: Horizontal Information Strip */}
+              <motion.div
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.65 }}
+                className="mt-10 sm:mt-12 pt-7 border-t border-black/10"
+              >
+                <div className="grid grid-cols-2 gap-y-6 sm:grid-cols-4 sm:gap-x-2 lg:gap-x-3">
+                  {heroStrip.map((stat, idx) => (
+                    <div
+                      key={stat.label}
+                      className={`flex flex-col ${idx !== heroStrip.length - 1 ? "sm:border-r sm:border-black/10 sm:pr-3" : ""}`}
+                    >
+                      <Icon path={stat.icon} className="h-5 w-5 text-[#FF8FB8]" />
+                      <p className="mt-2.5 text-2xl sm:text-3xl font-bold tracking-tight text-[#111827]">
+                        {stat.value}
+                      </p>
+                      <p className="mt-1 text-xs font-medium text-[#6B7280]">
+                        {stat.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Community Avatars & Description */}
+                <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-4 pt-5 border-t border-black/5">
+                  <div className="flex items-center">
+                    <div className="flex -space-x-2.5">
+                      {communityAvatars.map((src, i) => (
+                        <img
+                          key={i}
+                          src={src}
+                          alt="Community explorer"
+                          className="h-9 w-9 rounded-full border-2 border-white object-cover shadow-sm"
+                        />
+                      ))}
+                    </div>
+                    <span className="ml-2 grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#FF8FB8]/20 text-xs font-bold text-[#111827] shadow-sm">
+                      +
+                    </span>
+                  </div>
+                  <span className="hidden sm:block h-8 w-px bg-neutral-200 mx-2" />
+                  <p className="text-xs text-[#6B7280] leading-snug max-w-xs font-normal">
+                    A global community of explorers, creators and dreamers just like you.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* RIGHT SIDE: Large Architectural Photo Composition */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full pb-6 lg:pb-0"
+            >
+              {/* Handwritten script flourish above cards: More Than Places */}
+              <div className="relative mb-2 flex justify-end pr-6 sm:pr-12 lg:pr-16">
+                <div className="flex flex-col items-end">
+                  <span className="font-script-neon text-4xl sm:text-5xl lg:text-[54px] text-neutral-800 leading-none select-none tracking-normal -rotate-6">
+                    More Than Places
+                  </span>
+                  <svg className="w-28 sm:w-36 h-3 -mt-1 mr-1" viewBox="0 0 120 12" fill="none">
+                    <path d="M4 6 Q 60 12, 116 4" stroke="#FF8FB8" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Main Architectural Rounded Arch Portal Container */}
+              <div className="relative mx-auto w-full lg:w-[94%] xl:w-[96%] h-[480px] sm:h-[580px] lg:h-[640px] xl:h-[680px]">
+                {/* Outer Architectural Curved Plaster Surround */}
+                <div className="absolute -inset-3 sm:-inset-4 rounded-tl-[260px] sm:rounded-tl-[360px] rounded-tr-[50px] sm:rounded-tr-[60px] rounded-br-[140px] sm:rounded-br-[180px] rounded-bl-[60px] sm:rounded-bl-[70px] bg-[#EDE6DC]/70 shadow-[0_30px_70px_rgba(20,25,30,0.12)] border border-white/60 pointer-events-none" />
+
+                {/* Main Photo Window */}
+                <div className="relative w-full h-full rounded-tl-[250px] sm:rounded-tl-[345px] rounded-tr-[42px] sm:rounded-tr-[52px] rounded-br-[130px] sm:rounded-br-[168px] rounded-bl-[52px] sm:rounded-bl-[62px] overflow-hidden border-[8px] sm:border-[12px] border-[#F5EFE7] bg-[#121921] shadow-2xl">
+                  {/* Twilight Sydney Opera House and Harbor Party Photograph */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
+                    style={{
+                      backgroundImage: `url(${archPhoto})`,
+                      filter: "contrast(1.06) saturate(1.18) brightness(0.96)",
+                    }}
+                  />
+
+                  {/* Warm Sunset Amber/Golden Hour Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-900/35 via-transparent to-pink-500/15 mix-blend-color-dodge pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/25 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/15 pointer-events-none" />
+
+                  {/* Inner Arch Navigation Label: PEOPLE · PLACES · EXPERIENCES */}
+                  <div className="absolute top-9 sm:top-12 left-28 sm:left-36 lg:left-40 z-20 flex items-center gap-3 sm:gap-4 text-white drop-shadow-md">
+                    <div className="text-[10px] sm:text-[11px] font-bold tracking-[0.35em] uppercase leading-relaxed text-white/95">
+                      <div>PEOPLE</div>
+                      <div>PLACES</div>
+                      <div>EXPERIENCES</div>
+                    </div>
+                    <div className="w-16 sm:w-24 h-px bg-white/60" />
+                  </div>
+
+                  {/* Bottom Right Terrace Warm Candle Lantern Glow */}
+                  <div className="pointer-events-none absolute right-4 bottom-4 z-10 hidden sm:flex items-center gap-3 rounded-2xl bg-black/45 backdrop-blur-md px-4 py-2 border border-white/15 text-white/90">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500 shadow-[0_0_10px_#f59e0b]" />
+                    </span>
+                    <span className="text-[11px] font-medium tracking-wide">Sunset Candlelight Terrace</span>
+                  </div>
+                </div>
+
+                {/* SPECIAL FEATURE: Circular Frosted Quote Element */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.75, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ scale: 1.03 }}
+                  className="absolute bottom-8 -left-4 sm:bottom-10 sm:-left-8 lg:bottom-12 lg:-left-10 z-30 w-56 h-56 sm:w-68 sm:h-68 lg:w-72 lg:h-72 rounded-full bg-black/55 backdrop-blur-xl border border-white/25 p-6 sm:p-7 flex flex-col justify-center text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] select-none"
+                >
+                  <span className="font-serif text-3xl sm:text-4xl text-white/40 leading-none">“</span>
+                  <p className="font-serif-luxury italic text-xs sm:text-sm lg:text-[15px] leading-relaxed text-white/95 mt-1 sm:mt-1.5">
+                    &ldquo;It&apos;s not just about places, it&apos;s about the people who make them special.&rdquo;
+                  </p>
+                  <svg className="w-16 sm:w-20 h-3 mt-2 sm:mt-3" viewBox="0 0 80 12" fill="none">
+                    <path d="M4 4 Q 40 12, 76 4" stroke="#FF8FB8" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                </motion.div>
+
+                {/* 3 ASYMMETRIC FLOATING FEATURE CARDS (Stacked on the right, overlapping arch) */}
+                <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-[-20px] xl:right-[-32px] lg:top-1/2 lg:-translate-y-1/2 z-30 flex flex-col gap-3.5 sm:gap-4 w-full max-w-[340px] sm:max-w-[360px] mx-auto lg:mx-0">
+                  {editorialCards.map((card, index) => (
+                    <motion.div
+                      key={card.title}
+                      initial={{ opacity: 0, x: 25 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
+                      whileHover={{ scale: 1.03, x: -4 }}
+                      className={`group flex items-center gap-3 sm:gap-4 rounded-[26px] sm:rounded-[30px] bg-white/95 backdrop-blur-md p-2.5 sm:p-3 pr-5 sm:pr-6 shadow-[0_12px_32px_rgba(0,0,0,0.09)] border border-white/95 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.13)] cursor-pointer ${
+                        index === 1 ? "lg:translate-x-3" : index === 2 ? "lg:-translate-x-1" : ""
+                      }`}
+                    >
+                      {/* Rounded thumbnail image */}
+                      <div className="relative w-20 sm:w-24 h-14 sm:h-16 rounded-[20px] overflow-hidden shrink-0 shadow-inner bg-neutral-100">
+                        <img
+                          src={card.image}
+                          alt={card.alt}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+
+                      {/* Circular Icon Badge */}
+                      <div className="relative -ml-5 -mb-4 shrink-0 z-10">
+                        <span className="grid h-7 w-7 sm:h-8 sm:w-8 place-items-center rounded-full bg-white shadow-md border border-neutral-100">
+                          <Icon path={card.icon} className="h-4 w-4 text-[#FF8FB8]" />
+                        </span>
+                      </div>
+
+                      {/* Text Details */}
+                      <div className="min-w-0 pr-1">
+                        <p className="text-xs sm:text-sm font-bold text-[#111827] leading-tight group-hover:text-[#FF8FB8] transition-colors">
+                          {card.title}
+                        </p>
+                        <p className="text-[11px] sm:text-xs text-[#6B7280] mt-0.5 leading-snug">
+                          {card.subtitle}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Scroll Indicator in the bottom right */}
+              <div className="hidden lg:flex items-center gap-3 justify-end mt-4 pr-6 xl:pr-10">
+                <div className="w-5 h-8 rounded-full border border-neutral-400/80 flex items-start justify-center p-1">
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                    className="w-1.5 h-1.5 rounded-full bg-[#FF8FB8]"
+                  />
+                </div>
+                <div className="text-[10px] font-bold tracking-[0.25em] text-neutral-600 uppercase leading-snug">
+                  SCROLL TO<br />DISCOVER OUR JOURNEY
+                </div>
+              </div>
+
+            </motion.div>
+
+          </div>
         </div>
       </section>
+
+      {/* Interactive Video Modal */}
+      <AnimatePresence>
+        {isVideoModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-6 backdrop-blur-md"
+            onClick={() => setIsVideoModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-neutral-950 shadow-2xl border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setIsVideoModalOpen(false)}
+                className="absolute right-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/60 text-white transition hover:bg-[#FF8FB8] hover:text-black shadow-lg"
+                aria-label="Close video"
+              >
+                ✕
+              </button>
+              <div className="relative aspect-video w-full bg-black">
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube-nocookie.com/embed/LXb3EKWsInQ?autoplay=1"
+                  title="Our Story Video Reel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
       <section id="our-story" className="relative overflow-hidden px-5 py-20 md:px-12">

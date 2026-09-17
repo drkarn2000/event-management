@@ -9,6 +9,7 @@ import {
   experiences,
   getFeaturedExperience,
 } from "@/lib/data/site";
+import { DeeperDiveHero } from "@/components/DeeperDiveHero";
 
 const reveal = {
   initial: { opacity: 0, y: 28 },
@@ -71,37 +72,7 @@ export function DeeperDiveLanding() {
 
   return (
     <main className="overflow-hidden bg-[#f7f4ee] text-[#101b24]">
-      <section className="relative min-h-[62vh] overflow-hidden bg-[#071119] text-white">
-        <motion.div
-          initial={{ scale: 1.06 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071119]/92 via-[#071119]/45 to-[#071119]/10" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f7f4ee] to-transparent" />
-        <div className="relative mx-auto flex min-h-[62vh] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 md:px-12">
-          <motion.div {...reveal}>
-            <p className="text-xs font-black uppercase tracking-[0.55em] text-white/80">A Deeper Dive</p>
-            <h1 className="mt-5 max-w-3xl text-6xl font-black leading-[0.92] tracking-tight md:text-8xl">
-              More Than Just an Event
-            </h1>
-            <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-white/86">
-              Go beyond the ordinary with immersive experiences that connect you to people, places and new
-              perspectives.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a href="#experiences" className="rounded-full bg-[#ff8fb8] px-8 py-4 text-sm font-black text-[#071119] transition hover:bg-white">
-                Explore Experiences &rarr;
-              </a>
-              <button type="button" className="flex items-center gap-2 rounded-full border border-white/40 px-8 py-4 text-sm font-black text-white transition hover:bg-white hover:text-[#071119]">
-                <Icon path={icons.play} className="h-4 w-4" /> Watch Video
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <DeeperDiveHero />
 
       <section className="mx-auto grid max-w-[1440px] gap-8 px-5 py-14 sm:grid-cols-2 md:px-12 lg:grid-cols-4">
         {highlights.map((item) => (

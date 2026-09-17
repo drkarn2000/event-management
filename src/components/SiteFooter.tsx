@@ -50,9 +50,12 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-[1440px] px-5 pb-10 pt-16 md:px-10">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.8fr_0.8fr_1fr]">
           <div>
-            <Link href="/" className="inline-block leading-none">
-              <span className="block text-3xl font-black uppercase tracking-[0.14em]">VIBE</span>
-              <span className="block text-[9px] font-black uppercase tracking-[0.24em] text-white/55">Events & Experiences</span>
+            <Link href="/" className="inline-block leading-none group">
+              <img
+                src="/logo.png"
+                alt="VEYORA Events & Experiences"
+                className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-6 text-white/70">
               Unforgettable experiences around the world &mdash; hosted events, private celebrations, hens parties,

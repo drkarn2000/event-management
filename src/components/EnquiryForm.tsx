@@ -30,7 +30,7 @@ export function EnquiryForm({ type }: EnquiryFormProps) {
         Tell us the vibe
         <textarea className="min-h-32 rounded-md border border-black/15 px-4 py-3 font-normal outline-none focus:border-[#e84a27]" name="message" placeholder="Location, budget, occasion, non-negotiables..." />
       </label>
-      <button className="rounded-full bg-[#141414] px-5 py-3 text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#e84a27]" type="submit">
+      <button className="rounded-full bg-[#FF8FB8] px-5 py-3 text-sm font-black uppercase tracking-wide text-[#071119] transition hover:bg-[#071119] hover:text-white" type="submit">
         Send Enquiry
       </button>
     </form>

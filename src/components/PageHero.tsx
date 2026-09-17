@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, text, image, cta, ctaHref }: PageHero
         <h1 className="mt-4 max-w-4xl text-5xl font-black leading-none text-white md:text-7xl">{title}</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">{text}</p>
         {cta && ctaHref ? (
-          <a href={ctaHref} className="mt-8 w-fit rounded-full bg-[#ffd45a] px-6 py-3 text-sm font-black uppercase tracking-wide text-[#141414] transition hover:bg-white">
+          <a href={ctaHref} className="mt-8 w-fit rounded-full bg-[#FF8FB8] px-6 py-3 text-sm font-black uppercase tracking-wide text-[#071119] shadow-md transition hover:bg-white hover:shadow-[0_0_20px_rgba(255,143,184,0.4)]">
             {cta}
           </a>
         ) : null}
